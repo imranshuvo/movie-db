@@ -16,7 +16,8 @@ export default {
 	emtis: ['movies'],
 	data() {
 		return {
-			search: ''
+			search: '',
+			loading: false
 		}
 	},
 	props: {},
@@ -27,13 +28,26 @@ export default {
 					.then(response => response.json())
 					.then(data => {
 								const movies = data.Search;
-								this.$emit('movie-result', movies);
+								const loading = false;
+								this.$emit('movie-result', movies, loading);
+								this.search = '';
+								this.loading = false;
 								//console.log(movies)
 					});
 				}
 				
 		}
 	},
+	watch: {
+		search(){
+			if(this.search != ''){
+				this.loading = true;
+			}else{
+				this.loading = false;
+			}
+			this.$emit('loading-result', this.loading);
+		}
+	}
 };
 </script>
 
