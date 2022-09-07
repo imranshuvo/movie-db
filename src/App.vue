@@ -1,15 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- Header -->
+  <header-elm></header-elm>
+
+  <!-- Footer -->
+  <footer-elm></footer-elm>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+  import HeaderElm from './components/HeaderElm.vue';
+  import FooterElm from './components/FooterElm.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HeaderElm,
+    FooterElm
   }
 }
 </script>
@@ -22,5 +28,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  
 }
 </style>
