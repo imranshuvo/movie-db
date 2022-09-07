@@ -5,10 +5,10 @@
   <!-- Content -->
   <!-- <featured-movie></featured-movie> -->
   <movie-search @movie-result="ShowMovieResult" @loading-result="ShowLoading"></movie-search>
-  <search-result @movie-details="showDetails" :movies="MovieResult" :loading="loading" ></search-result>
+  <search-result @movie-details="showDetails" :movies="MovieResult" :loading="loading" :responseText="responseText"></search-result>
 
   <!-- Footer -->
-  <footer-elm :movie="movie" :modal-closed="modalClosed"></footer-elm>
+  <footer-elm :movie="movie" v-if="showModal" @close-modal="closeModal"></footer-elm>
 </template>
 
 <script>
@@ -30,15 +30,19 @@ export default {
   data() {
     return {
       MovieResult: [],
+			responseText: '',
       loading: false,
       movie: {},
-			modalClosed: true
+			showModal: false
     }
   },
   methods: {
-    ShowMovieResult(movies){
+    ShowMovieResult(movies, response ){
         //console.table(movies);
         this.MovieResult = movies;
+				this.responseText = response;
+
+				console.log(this.responseText);
     },
     ShowLoading(loading){
       this.loading = loading;
@@ -48,9 +52,12 @@ export default {
        .then( response => response.json())
        .then( data => {
           this.movie = data;
-					this.modalClosed = false;
+					this.showModal = true;
        });
-    }
+    },
+		closeModal(){
+			this.showModal = false;
+		}
   },
 }
 </script>

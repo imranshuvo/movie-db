@@ -16,8 +16,9 @@
       </div>
     </div>
     <div class="movie-container">
+        <div class="text-red-500" v-if="notFound">{{ errorMessage }}</div>
         <div v-for="movie in movies" :key="movie.imdbID" class="overflow-hidden single-movie w-1/5 px-2 mb-6 relative">
-          <a href="#" id="" @click.prevent="movieDetail(movie.imdbID)">
+          <a href="" id="" @click.prevent="movieDetail(movie.imdbID)">
           <img :src="movie.Poster" :alt="movie.Title">
           <h3 class="bottom-6 text-white bg-sky-900/100 p-2 w-full">{{ movie.Title }} - <span>{{ movie.Year }}</span></h3>
           </a>
@@ -32,15 +33,25 @@ export default {
   created() {},
   data() {
     return {
-      
+      errorMessage: 'Movies not found!',
+      movieNotFound: false
     };
   },
-  props: ['movies','loading'],
+  props: ['movies','loading','responseText'],
   methods: {
     movieDetail(id){
       this.$emit('movie-details', id);
     }
   },
+  computed: {
+    notFound(){
+      if(this.responseText == 'False'){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
 };
 </script>
 
