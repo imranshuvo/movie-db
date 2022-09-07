@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-bold text-center"><span>Movie</span>Search DB</h1>
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "HeaderElm",
+  name: "Test",
   created() {},
   data() {
     return {};

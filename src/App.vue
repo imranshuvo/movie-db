@@ -1,6 +1,11 @@
 <template>
   <!-- Header -->
-  <header-elm></header-elm>
+  <header-elm class="bg-slate-500 text-white py-6"></header-elm>
+
+  <!-- Content -->
+  <featured-movie></featured-movie>
+  <movie-search @movie-result="ShowMovieResult"></movie-search>
+  <search-result :movies="MovieResult"></search-result>
 
   <!-- Footer -->
   <footer-elm></footer-elm>
@@ -10,12 +15,32 @@
 
   import HeaderElm from './components/HeaderElm.vue';
   import FooterElm from './components/FooterElm.vue';
+  import MovieSearch from './components/MovieSearch.vue';
+  import SearchResult from './components/SearchResult.vue';
 
 export default {
   name: 'App',
   components: {
     HeaderElm,
-    FooterElm
+    FooterElm,
+    MovieSearch,
+    SearchResult
+  },
+  data() {
+    return {
+       MovieResult: [],
+    }
+  },
+  methods: {
+    ShowMovieResult(movies){
+        //console.table(movies);
+        this.MovieResult = movies;
+    }
+  },
+  watch: {
+    MovieResult(){
+        console.log('changed');
+    }
   }
 }
 </script>
@@ -25,9 +50,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 * {
   margin: 0;
